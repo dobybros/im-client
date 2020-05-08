@@ -1,9 +1,9 @@
 import * as protobuf from 'protobufjs'
 import * as pako from 'pako'
-import NetworkUtils from "../../utils/NetworkUtils"
+import NetworkUtils from "../utils/NetworkUtils"
 import request from "./HttpRequest"
-import {HashMap} from "../../utils/HashMap"
-import {log} from "../../utils/logger"
+import {HashMap} from "../utils/HashMap"
+import {log} from "../utils/logger"
 
 const logger = log('tc-class-core', 'IMWSConnection')
 const TERMINAL_WEB_MOBILE = 5

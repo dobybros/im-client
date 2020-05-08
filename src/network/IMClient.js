@@ -1,6 +1,6 @@
 import IMWSConnection from "./IMWSConnection";
-import SortedMap from "../../utils/SortedMap";
-import {log} from "../../utils/logger";
+import SortedMap from "../utils/SortedMap";
+import {log} from "../utils/logger";
 
 const logger = log("tc-class-core", "IMClient")
 const STATUS_INIT = 1
