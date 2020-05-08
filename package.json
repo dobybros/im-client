@@ -1,0 +1,16 @@
+{
+  "name": "ql-im-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/network/IMClient.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dobybros/ql-im-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dobybros/ql-im-client/issues"
+  },
+  "homepage": "https://github.com/dobybros/ql-im-client#readme"
+}
