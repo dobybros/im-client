@@ -12,5 +12,9 @@
   "bugs": {
     "url": "https://github.com/dobybros/ql-im-client/issues"
   },
+  "dependencies": {
+    "pako": "^1.0.10",
+    "protobufjs": "^6.8.8"
+  },
   "homepage": "https://github.com/dobybros/ql-im-client#readme"
 }
