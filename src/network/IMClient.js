@@ -31,9 +31,13 @@ export default class IMClient {
   close() {
     if (this.client) {
       logger.info('closed by hand, will not retry...')
+      this.sendEvent(".status", {type: "disconnected"})
+      this._eventListener = null
       console.trace()
       this.needRetry = false
       this.client.disconnect()
+    } else {
+      logger.warn("im client not fount, skip close action")
     }
   }
 
