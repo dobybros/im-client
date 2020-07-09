@@ -76,7 +76,7 @@ export default class IMClient {
   handleConnectionData(event, obj) {
     switch (event) {
       case  ".status": {
-        this.sendEvent(".status", obj.type)
+        this.sendEvent(".status", obj.type, obj.error)
         if (this.debug) console.log("im log " + obj.type + (obj !== undefined ? (" obj " + JSON.stringify(obj)) : ""))
         var action = obj.type
         var dataJson = {
@@ -199,8 +199,8 @@ export default class IMClient {
     }
   }
 
-  sendEvent(event, message) {
-    this._eventListener && this._eventListener(event, message)
+  sendEvent(event, message, error) {
+    this._eventListener && this._eventListener(event, message, error)
   }
 
   send(message, callback) {

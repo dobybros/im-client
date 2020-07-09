@@ -143,7 +143,7 @@ export default class IMWSConnection {
       if (err.data && 4000 <= err.data.code && err.data.code <= 5000) {
         type = 'outofdate'
       }
-      this.sendEvent(".status", {type: type})
+      this.sendEvent(".status", {type: type, error: err.data})
     }
   }
 
