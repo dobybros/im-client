@@ -17,6 +17,7 @@ export default class IMClient {
     this.service = service
     this.auth = auth
     this.debug = true
+    this.pingCount = 0
     this.imLoginUrl = imLoginUrl
     this.status = STATUS_INIT
     if (needMsgQueue !== false)
@@ -96,11 +97,21 @@ export default class IMClient {
             }
             this.intervalId = setInterval(function () {
               // this.client.justPing() // need server implement for small ping. which no response
+              this.pingCount += 1
               this.client.ping(function (data) {
                 if (this.debug) console.log("ping result " + ((new Date()).getTime() - data.time))
-
+                this.pingCount = 0
                 //TODO ping
-              })
+              }.bind(this))
+              if (this.pingCount > 3) {
+                console.log("Ping " + this.pingCount + " times, but not receive result, will close channel for reconnection")
+                if (this.client) {
+                  this.client.disconnect()
+                  clearInterval(this.intervalId)
+                  this.pingCount = 0
+                  return
+                }
+              }
             }.bind(this), pingInterval)
             break
           case "disconnected":
