@@ -99,7 +99,7 @@ export default class IMClient {
               // this.client.justPing() // need server implement for small ping. which no response
               this.pingCount += 1
               this.client.ping(function (data) {
-                if (this.debug) console.log("ping result " + ((new Date()).getTime() - data.time))
+                if (this.debug) console.log("ping result")
                 this.pingCount = 0
                 //TODO ping
               }.bind(this))
