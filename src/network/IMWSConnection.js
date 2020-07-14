@@ -159,9 +159,16 @@ export default class IMWSConnection {
   disconnect() {
     if (this.ws) {
       try {
-        this.ws.close()
+        this.ws.onclose()
+        this.ws.onclose = null
       } catch (e) {
-        logger.warn("WS close error", e)
+        logger.warn("attack onclose error", e)
+      } finally {
+        try {
+          this.ws.close()
+        } catch (e) {
+          logger.warn("WS close error", e)
+        }
       }
     }
   }
