@@ -77,7 +77,8 @@ export default class IMWSConnection {
     this.callbackMap = new HashMap()
   }
 
-  init() {
+  init(loginFunction) {
+    this.loginFunction = loginFunction
     if (!this.mobilePB) {
       // const mobileProto = require('./Mobile.proto');
       protobuf.load("/Mobile.proto", function (err, root) {
@@ -115,8 +116,12 @@ export default class IMWSConnection {
       service: this.service
     }
     try {
-      const jsonData = await request('post', this.loginUrl, requestBody, {classtoken: this.auth})
-      let count = 0
+      let jsonData = {}
+      if (this.loginFunction) {
+        jsonData = await this.loginFunction()
+      } else {
+        jsonData = await request('post', this.loginUrl, requestBody, {classtoken: this.auth})
+      }
       if (jsonData) {
         logger.debug(jsonData)
       }
