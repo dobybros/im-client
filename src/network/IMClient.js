@@ -11,7 +11,7 @@ const STATUS_DISCONNECTED = 10
 const DEVICE_TOKEN = "dt"
 export default class IMClient {
   constructor(parameters) {
-    let {account, service, auth, terminal, imLoginUrl, needMsgQueue, } = parameters
+    let {account, service, auth, terminal, imLoginUrl, needMsgQueue} = parameters
     this.terminal = parseInt(terminal)
     this.account = account
     this.service = service
@@ -24,8 +24,7 @@ export default class IMClient {
       this.msgQueue = new SortedMap()
   }
 
-  start(loginFunction) {
-    this.loginFunction = loginFunction
+  start() {
     this.connectWebSocket()
   }
 
@@ -72,7 +71,7 @@ export default class IMClient {
     this.needRetry = true
     this.client.setEventListener(this.handleConnectionData.bind(this))
 
-    this.client.init(this.loginFunction)
+    this.client.init()
   }
 
   handleConnectionData(event, obj) {

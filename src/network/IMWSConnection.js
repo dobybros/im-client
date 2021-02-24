@@ -77,8 +77,7 @@ export default class IMWSConnection {
     this.callbackMap = new HashMap()
   }
 
-  init(loginFunction) {
-    this.loginFunction = loginFunction
+  init() {
     if (!this.mobilePB) {
       // const mobileProto = require('./Mobile.proto');
       protobuf.load("/Mobile.proto", function (err, root) {
@@ -116,12 +115,8 @@ export default class IMWSConnection {
       service: this.service
     }
     try {
-      let jsonData = {}
-      if (this.loginFunction) {
-        jsonData = await this.loginFunction()
-      } else {
-        jsonData = await request('post', this.loginUrl, requestBody, {classtoken: this.auth})
-      }
+      const jsonData = await request('post', this.loginUrl, requestBody, {classtoken: this.auth})
+      let count = 0
       if (jsonData) {
         logger.debug(jsonData)
       }
@@ -134,6 +129,7 @@ export default class IMWSConnection {
         let server = data["s"]
         let sid = data["sid"]
         let host = data["host"]
+        this.imAccount = data["account"]
         if (!sid || !server) {
           throw Error("Login server failed, sid " + sid + " server " + server)
         }
@@ -192,7 +188,7 @@ export default class IMWSConnection {
       var IdentityConstructor = this.mobilePB.lookupType("Identity")
       var payload = {
         sessionId: this.sid,
-        userId: this.account,
+        userId: this.imAccount,
         terminal: this.terminal,
         deviceToken: this.deviceToken,
         sdkVersion: sdkVersion,
