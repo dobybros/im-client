@@ -13,7 +13,7 @@
     "url": "https://github.com/dobybros/ql-im-client/issues"
   },
   "dependencies": {
-    "debug": "^4.1.1",
+    "debug": "^4.3.1",
     "pako": "^1.0.10",
     "protobufjs": "^6.8.8"
   },
